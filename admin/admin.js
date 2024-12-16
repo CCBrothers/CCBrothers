@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newAcquisti === null) return;
 
         try {
-            const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/admin/users/${codice}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('Sei sicuro di voler eliminare questo utente?')) return;
 
         try {
-            const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/admin/users/${codice}`, {
                 method: 'DELETE',
                 headers: {
                     'admin-token': adminToken
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
+                const response = await fetch(`https://ccbrothers-backend.onrender.com/admin/users/${codice}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
