@@ -20,7 +20,7 @@ formRegistrazione.addEventListener('submit', async (event) => {
     const email = document.getElementById('email').value;
 
     try {
-        const response = await fetch('https://ccbrothers-backend.onrender.com', {
+        const response = await fetch('https://ccbrothers-backend.onrender.com/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ formAccesso.addEventListener('submit', async (event) => {
     const codiceUnivoco = document.getElementById('codice-univoco').value;
 
     try {
-        const response = await fetch('http://localhost:3000/verify-code', {
+        const response = await fetch('https://ccbrothers-backend.onrender.com/verify-code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
