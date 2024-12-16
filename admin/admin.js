@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento degli utenti
     async function loadUsers() {
         try {
-            const response = await fetch('http://localhost:3000/admin/users', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com', {
                 headers: {
                     'admin-token': adminToken
                 }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento delle statistiche
     async function loadStats() {
         try {
-            const response = await fetch('http://localhost:3000/admin/stats', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com', {
                 headers: {
                     'admin-token': adminToken
                 }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento dei rewards
     async function loadRewards() {
         try {
-            const response = await fetch('http://localhost:3000/admin/rewards', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com', {
                 headers: {
                     'admin-token': adminToken
                 }
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newAcquisti === null) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/admin/users/${codice}`, {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('Sei sicuro di voler eliminare questo utente?')) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/admin/users/${codice}`, {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
                 method: 'DELETE',
                 headers: {
                     'admin-token': adminToken
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/admin/users/${codice}`, {
+                const response = await fetch(`https://ccbrothers-backend.onrender.com/${codice}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
