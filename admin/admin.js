@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('admin-password').value;
 
         try {
-            const response = await fetch('https://ccbrothers-backend.onrender.com', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com/admin/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento degli utenti
     async function loadUsers() {
         try {
-            const response = await fetch('https://ccbrothers-backend.onrender.com', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com/admin/users', {
                 headers: {
                     'admin-token': adminToken
                 }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento delle statistiche
     async function loadStats() {
         try {
-            const response = await fetch('https://ccbrothers-backend.onrender.com', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com/admin/stats', {
                 headers: {
                     'admin-token': adminToken
                 }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Caricamento dei rewards
     async function loadRewards() {
         try {
-            const response = await fetch('https://ccbrothers-backend.onrender.com', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com/admin/rewards', {
                 headers: {
                     'admin-token': adminToken
                 }
