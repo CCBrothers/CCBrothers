@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('admin-password').value;
 
         try {
-            const response = await fetch('http://localhost:3000/admin/login', {
+            const response = await fetch('https://ccbrothers-backend.onrender.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
