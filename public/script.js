@@ -20,7 +20,7 @@ formRegistrazione.addEventListener('submit', async (event) => {
     const email = document.getElementById('email').value;
 
     try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('https://ccbrothers-backend.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
