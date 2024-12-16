@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1f35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Card Collector Brothers - Unisciti alla nostra community di collezionisti">
+    <title>Join Our Community! 🚀</title>
+    
+    <!-- Favicon per vari dispositivi -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Fonts e Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <div class="header">
+        <h1 class="animate__animated animate__fadeIn">CARD COLLECTOR BROTHERS</h1>
+        <p class="animate__animated animate__fadeIn animate__delay-1s">
+          Entra a far parte della nostra community
+        </p>
+      </div>
+
+      <form id="form-registrazione" class="animate__animated animate__fadeIn animate__delay-1s">
+        <div class="input-group">
+          <input type="text" id="nome" name="nome" required>
+          <label for="nome">Il tuo nome</label>
+          <span class="highlight"></span>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="cognome" name="cognome" required>
+          <label for="cognome">Il tuo cognome</label>
+          <span class="highlight"></span>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="nickname" name="nickname" required>
+          <label for="nickname">Il tuo nickname</label>
+          <span class="highlight"></span>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="email" name="email" required>
+          <label for="email">La tua email</label>
+          <span class="highlight"></span>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span>Registrati</span>
+          <div class="success-animation">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+        </button>
+      </form>
+
+       <!-- Form di Accesso -->
+    <form id="form-accesso" class="animate__animated animate__fadeIn animate__delay-2s">
+        <h2>Accedi alla tua scheda personale</h2>
+        <div class="input-group">
+          <input type="text" id="codice-univoco" name="codice-univoco" required>
+          <label for="codice-univoco">Il tuo codice univoco</label>
+          <span class="highlight"></span>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span>Accedi</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+ <!-- Sezione Personale -->
+<div id="sezione-personale" style="display: none;" class="personal-section">
+  <div class="card-container">
+    <div class="credit-card">
+      <!-- Fronte della carta -->
+      <div class="card-front">
+        <!-- Top section -->
+        <div class="card-chip"></div>
+        <div class="card-logo">CARD COLLECTOR PREMIUM</div>
+        
+        <!-- Main card content -->
+        <div class="card-content">
+            <!-- ID e Data row -->
+            <div class="card-row">
+                <div class="card-item">
+                    <span class="label">ID CODE</span>
+                    <span id="codice-utente" class="value"></span>
+                </div>
+                <div class="card-item">
+                    <span class="label">DATA ISCRIZIONE</span>
+                    <span id="data-registrazione" class="value"></span>
+                </div>
+            </div>
+
+            <!-- Nome e Nickname row -->
+            <div class="card-row">
+                <div class="card-item">
+                    <span class="label">CARD HOLDER</span>
+                    <span id="nome-completo" class="value"></span>
+                </div>
+                <div class="card-item">
+                    <span class="label">NICKNAME</span>
+                    <span id="nickname-utente" class="value"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="card-status">
+            <span class="label">COLLECTOR STATUS</span>
+            <div class="progress-container">
+                <div id="barra-progresso" class="progress-bar"></div>
+                <span id="acquisti-utente" class="progress-text"></span>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Retro della carta -->
+      <div class="card-back">
+        <!-- Top section -->
+        <div class="card-chip"></div>
+        <div class="card-logo">BENEFITS & REWARDS</div>
+        
+        <!-- Rewards list -->
+        <div class="rewards-list">
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 1 - 10 ACQUISTI</div>
+                <div class="reward-desc">5% Sconto sul prossimo acquisto</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 2 - 25 ACQUISTI</div>
+                <div class="reward-desc">10% Sconto su tutti i prodotti</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 3 - 50 ACQUISTI</div>
+                <div class="reward-desc">Accesso anticipato alle nuove uscite</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 4 - 75 ACQUISTI</div>
+                <div class="reward-desc">Card Collector esclusiva omaggio</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 5 - 100 ACQUISTI</div>
+                <div class="reward-desc">Status VIP permanente + 20% Sconto</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 6 - 150 ACQUISTI</div>
+                <div class="reward-desc">Accesso eventi esclusivi</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-level">LEVEL 7 - 200 ACQUISTI</div>
+                <div class="reward-desc">Card Collector Oro Limited Edition</div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="success-modal" class="modal animate__animated animate__fadeIn" style="display: none;">
+  <div class="form-container modal-content">
+      <div class="header">
+          <h1>Registrazione Completata! 🎉</h1>
+          <p>Il tuo codice univoco è:</p>
+      </div>
+      <div class="input-group" style="text-align: center;">
+          <div id="unique-code" style="font-size: 32px; color: #3B82F6; font-weight: 700; margin: 20px 0;"></div>
+      </div>
+      <p style="margin: 20px 0; color: #4B5563;">
+          Conserva questo codice con cura, ti servirà per accedere al tuo profilo!
+      </p>
+      <button class="submit-btn modal-close-btn">
+          <span>Ho salvato il codice</span>
+      </button>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

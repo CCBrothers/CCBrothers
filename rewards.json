@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "level": "LEVEL 1",
+    "requiredPurchases": 25,
+    "description": "10% Sconto su tutti i prodotti"
+  },
+  {
+    "id": 2,
+    "level": "LEVEL 2",
+    "requiredPurchases": 50,
+    "description": "Accesso anticipato alle nuove uscite"
+  },
+  {
+    "id": 3,
+    "level": "LEVEL 3",
+    "requiredPurchases": 75,
+    "description": "Card Collector esclusiva omaggio"
+  }
+]

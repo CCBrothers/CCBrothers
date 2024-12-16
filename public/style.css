@@ -1,0 +1,739 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2B3148 0%, #434E74 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Form Container Styles */
+.container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.form-container {
+    background: linear-gradient(135deg, #FFF 0%, #F8F9FF 100%);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2),
+                0 0 120px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Form Holographic Effect */
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 45%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.1) 55%,
+        transparent 100%
+    );
+    pointer-events: none;
+    animation: holographic 3s ease-in-out infinite;
+}
+
+/* Form Typography */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+h1 {
+    color: #1E293B;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    line-height: 0.8;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    color: #4B5563;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+h2 {
+    color: #4B5563;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* Form Input Styles */
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #1E293B;
+    border: 2px solid #E2E8F0;
+    border-radius: 8px;
+    outline: none;
+    background: #F8FAFC;
+    transition: all 0.3s ease-in-out;
+    font-weight: 400;
+}
+
+input:focus {
+    border-color: #93C5FD;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.2);
+}
+
+label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    padding: 0 5px;
+    font-size: 14px;
+    color: #6B7280;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+    top: -18px;
+    font-size: 15px;
+    color: #3B82F6;
+    font-weight: 500;
+    transform: translateY(-2px);
+}
+
+/* Submit Button Styles */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    transition: 0.5s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Personal Section Styles */
+.personal-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1f35 0%, #2d3250 100%);
+    padding: 20px;
+    min-height: -webkit-fill-available; /* Fix per iOS */
+    overflow: hidden;
+}
+
+/* Per schermi molto piccoli in portrait */
+@media screen and (max-width: 360px) {
+    .card-container {
+        --scale-ratio: 0.65;
+    }
+}
+
+/* Per orientamento landscape */
+@media screen and (max-height: 500px) {
+    .card-container {
+        --scale-ratio: 0.6;
+    }
+}
+
+/* Card Container */
+.card-container {
+    perspective: 1000px;
+    width: 100%;  /* Cambiato da width fissa a 100% */
+    max-width: 600px; /* La dimensione massima su desktop */
+    height: auto;
+    aspect-ratio: 1.67/1; /* Mantiene il rapporto 600/360 */
+    margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .card-container {
+        --scale-ratio: 0.9; /* aumentato da 0.83 */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .card-container {
+        --scale-ratio: 0.8; /* aumentato da 0.67 */
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .card-container {
+        --scale-ratio: 0.7; /* aumentato da 0.53 */
+    }
+}
+
+/* Credit Card Base */
+.credit-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    pointer-events: none; /* Aggiungi questa riga */
+}
+
+.credit-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Card Front and Back Common Styles */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: linear-gradient(125deg, #1a1f35 0%, #2d3250 40%, #424869 100%);
+    border-radius: 25px;
+    padding: 5%;
+    color: #fff;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    pointer-events: auto;
+    z-index: 100;
+}
+
+/* Card Elements */
+.card-chip {
+    width: 13%;
+    height: auto;
+    aspect-ratio: 1.23/1; /* mantiene proporzione originale */
+    background: linear-gradient(135deg, #c4a630 0%, #f2d660 50%, #c4a630 100%);
+    border-radius: 15px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 100; /* Aggiungiamo questo */
+    pointer-events: auto; /* E aggiungi questa riga alle proprietà del chip */
+}
+
+.card-chip:hover {
+    transform: scale(1.1);
+}
+
+/* Chip Cross */
+.card-chip::before,
+.card-chip::after {
+    content: '';
+    position: absolute;
+    background: #1a1f35;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.card-chip::before {
+    width: 45px;
+    height: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-chip::after {
+    width: 3px;
+    height: 45px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.credit-card.flipped .card-chip::before,
+.credit-card.flipped .card-chip::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Card Logo */
+.card-logo {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: clamp(14px, 4vw, 24px); /* responsive font size */
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 
+        0 0 5px rgba(196, 166, 48, 0.5),
+        0 0 10px rgba(196, 166, 48, 0.3);
+    background: linear-gradient(to right, #ffffff, #c4a630);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Card Content Layout */
+.card-content {
+    position: relative;
+    height: 100%;
+    padding-top: 15%;
+}
+
+/* Media queries */
+@media screen and (max-width: 767px) {
+    .personal-section {
+        padding: 15px;
+    }
+    
+    .card-container {
+        max-width: 500px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .card-container {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .card-container {
+        max-width: 320px;
+    }
+}
+
+.card-row {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: -25px;
+}
+
+.card-row:first-of-type {
+    top: 40%; /* Ridotto per alzare la prima riga */
+    margin-bottom: 20px; /* Aggiunto margine per spaziatura */
+}
+
+.card-row:nth-of-type(2) {
+    top: 70%; /* Ridotto per spostare la seconda riga di conseguenza */
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Label and Value Styles */
+.label {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: -10px;
+    color: rgba(255,255,255,0.7);
+}
+
+.value {
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* Status Bar */
+.card-status {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    right: 40px;
+}
+
+.progress-container {
+    background: rgba(255,255,255,0.1);
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #c4a630, #f2d660);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    position: absolute;
+    right: 0;
+    top: -28px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Rewards List */
+.rewards-list {
+    margin-top: 100px;
+    height: 180px;
+    overflow-y: auto;
+    padding: 0 15px;
+    padding-right: 25px;
+}
+
+/* Rewards List Scrollbar */
+.rewards-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.rewards-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.rewards-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #c4a630, #f2d660);
+    border-radius: 10px;
+}
+
+/* Reward Items */
+.reward-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 40px 12px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.reward-item.completed {
+    background: rgba(46, 204, 113, 0.1);
+    border-color: rgba(46, 204, 113, 0.2);
+}
+
+.reward-level {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f2d660;
+    margin-bottom: 3px;
+}
+
+.reward-item.completed .reward-level {
+    color: #2ecc71;
+}
+
+.reward-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.2;
+}
+
+/* Checkmark */
+.checkmark {
+    position: absolute;
+    right: 25px;
+    top: 13px;
+    color: #2ecc71;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Stile per i bottoni sul retro della carta */
+/* Carta base */
+.credit-card {
+    transition: transform 0.8s; /* Animazione */
+    transform-style: preserve-3d; /* Necessario per l'effetto 3D */
+}
+
+/* Stato flipped */
+.credit-card.flipped {
+    transform: rotateY(180deg); /* Rotazione */
+}
+
+.credit-card button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effetto */
+.credit-card button:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+/* Animazione sul bottone */
+.credit-card button:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+/* Animations */
+@keyframes holographic {
+    0% {
+        opacity: 0.5;
+        transform: translateX(-100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+        transform: translateX(100%);
+    }
+}
+
+/* Per il testo nella card */
+.label {
+    font-size: clamp(10px, 2vw, 14px); /* Responsive da 10px a 14px */
+    letter-spacing: 1px;
+}
+
+.value {
+    font-size: clamp(12px, 2.5vw, 22px); /* Responsive da 12px a 22px */
+    letter-spacing: 1px;
+}
+
+/* Sistema le righe della card */
+.card-row {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+}
+
+/* Layout normale per desktop resta invariato */
+.card-row:first-of-type {
+    top: 35%;
+}
+
+.card-row:nth-of-type(2) {
+    top: 60%;
+}
+
+/* Per la lista rewards sul retro */
+.rewards-list {
+    margin-top: 80px;
+    height: calc(100% - 120px); /* Altezza calcolata in base allo spazio disponibile */
+    overflow-y: auto;
+    padding: 0 15px;
+    /* Contiene tutto all'interno della card */
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    bottom: 20px;
+}
+
+/* Stile elementi reward */
+.reward-item {
+    padding: 8px 30px 8px 10px;
+    margin-bottom: 8px;
+}
+
+.reward-level {
+    font-size: clamp(10px, 2vw, 15px);
+}
+
+.reward-desc {
+    font-size: clamp(8px, 1.8vw, 13px);
+}
+
+@media screen and (max-width: 767px) {
+    .card-row:first-of-type {
+        top: 40%;
+    }
+    
+    .card-row:nth-of-type(2) {
+        top: 65%;
+    }
+
+    .rewards-list {
+        margin-top: 60px;
+        height: calc(100% - 100px);
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .rewards-list {
+        margin-top: 50px;
+        height: calc(100% - 80px);
+    }
+    
+    .reward-item {
+        padding: 6px 25px 6px 8px;
+        margin-bottom: 6px;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(26, 31, 53, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .form-container {
+    max-width: 400px;
+    margin: 20px;
+    animation: modalSlideIn 0.5s ease-out;
+}
+
+.modal h1 {
+    font-size: 2.5rem;
+}
+
+.modal #unique-code {
+    background: linear-gradient(125deg, #1a1f35 0%, #2d3250 40%, #424869 100%);
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #f2d660;
+    text-shadow: 0 0 10px rgba(242, 214, 96, 0.3);
+    margin: 20px 0;
+    text-align: center;
+}
+
+.modal .submit-btn {
+    background: linear-gradient(135deg, #c4a630 0%, #f2d660 100%);
+    margin-top: 20px;
+}
+
+.modal p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Responsive */
+@media screen and (max-width: 479px) {
+    .modal .form-container {
+        padding: 25px;
+    }
+
+    .modal h1 {
+        font-size: 2rem;
+    }
+
+    .modal #unique-code {
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .modal .form-container {
+        padding: 20px;
+    }
+
+    .modal h1 {
+        font-size: 1.8rem;
+    }
+
+    .modal #unique-code {
+        font-size: 1.2rem;
+        padding: 12px;
+    }
+}

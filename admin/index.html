@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="theme-color" content="#1a1f35">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <title>Admin Panel - Card Collector Brothers</title>
+        
+        <!-- Favicon per vari dispositivi -->
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+        
+        <!-- Fonts e Styles -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="admin.css">
+    </head>
+<body>
+    <!-- Login Form -->
+    <div id="login-container" class="login-container">
+        <div class="login-box">
+            <h2>Admin Access</h2>
+            <form id="admin-login-form">
+                <div class="input-group">
+                    <input type="text" id="admin-username" required>
+                    <label for="admin-username">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="admin-password" required>
+                    <label for="admin-password">Password</label>
+                </div>
+                <button type="submit">Accedi</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+        <nav class="admin-nav">
+            <div class="nav-logo">Card Collector Admin</div>
+            <div class="nav-items">
+                <button data-section="users" class="active">Utenti</button>
+                <button data-section="cards">Cards</button>
+                <button data-section="rewards">Rewards</button>
+                <button data-section="stats">Statistiche</button>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Users Section -->
+        <section id="users-section" class="admin-section">
+            <h2>Gestione Utenti</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Cerca utente...">
+                <button>Cerca</button>
+            </div>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Nickname</th>
+                        <th>Codice</th>
+                        <th>Acquisti</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Cards Section -->
+        <section id="cards-section" class="admin-section" style="display: none;">
+            <h2>Gestione Acquisti</h2>
+            
+            <div class="purchase-form-container">
+                <div class="form-wrapper">
+                    <h3>Aggiungi Acquisti</h3>
+                    <div class="input-group">
+                        <input type="text" id="user-code" required>
+                        <label for="user-code">Codice Utente</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="purchase-amount" min="1" required>
+                        <label for="purchase-amount">Numero Acquisti</label>
+                    </div>
+                    <button id="add-purchase-btn" class="submit-btn">Aggiungi Acquisti</button>
+                </div>
+        
+                <div class="recent-purchases">
+                    <h3>Ultimi Acquisti</h3>
+                    <div id="purchase-history" class="purchase-list">
+                        <!-- Popolato dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Rewards Section -->
+        <section id="rewards-section" class="admin-section" style="display: none;">
+            <h2>Gestione Rewards</h2>
+            <div class="rewards-editor">
+                <button id="add-reward" class="add-btn">+ Aggiungi Reward</button>
+                <div id="rewards-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats-section" class="admin-section" style="display: none;">
+            <h2>Statistiche</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Utenti Totali</h3>
+                    <div id="total-users" class="stat-value">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Acquisti Totali</h3>
+                    <div id="total-purchases" class="stat-value">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Media Acquisti</h3>
+                    <div id="avg-purchases" class="stat-value">0</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="stats-chart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
