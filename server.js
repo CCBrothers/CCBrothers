@@ -5,8 +5,13 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-// Middleware essenziali
-app.use(cors());
+// Middleware essenziali con CORS configurato
+app.use(cors({
+    origin: ['https://ccbrothers-app.netlify.app', 'https://ccbrothers-admin.netlify.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'admin-token']
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
