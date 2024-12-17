@@ -204,8 +204,11 @@ app.post('/verify-code', (req, res) => {
 
 // Login admin
 app.post('/admin/login', (req, res) => {
-    console.log('Tentativo di login admin:', req.body);
+    console.log('Tentativo di login admin - Body:', req.body);
+    console.log('Headers:', req.headers);
     const { username, password } = req.body;
+    
+    res.setHeader('Content-Type', 'application/json');
     
     if (username === 'Daxx' && password === 'Metanolo89!') {
         res.json({ 
