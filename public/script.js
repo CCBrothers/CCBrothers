@@ -185,3 +185,5 @@ function updateAcquisti(nuovoValore) {
     document.getElementById('barra-progresso').style.width = `${progresso}%`;
     updateRewardsStatus(acquisti);
 }
+
+// update
