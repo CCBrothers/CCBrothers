@@ -254,6 +254,100 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Gestione dei rewards
+    window.editReward = async function(id) {
+        const newLevel = prompt('Inserisci il nuovo livello:');
+        const newRequiredPurchases = prompt('Inserisci il numero di acquisti richiesti:');
+        const newDescription = prompt('Inserisci la nuova descrizione:');
+        
+        if (!newLevel || !newRequiredPurchases || !newDescription) return;
+
+        try {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/admin/rewards/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'admin-token': adminToken
+                },
+                body: JSON.stringify({
+                    level: newLevel,
+                    requiredPurchases: parseInt(newRequiredPurchases),
+                    description: newDescription
+                })
+            });
+
+            if (response.ok) {
+                alert('Reward aggiornato con successo');
+                loadRewards();  // Ricarica la lista dei rewards
+            } else {
+                alert('Errore durante l\'aggiornamento');
+            }
+        } catch (error) {
+            console.error('Errore durante la modifica:', error);
+            alert('Errore durante la modifica');
+        }
+    };
+
+    window.deleteReward = async function(id) {
+        if (!confirm('Sei sicuro di voler eliminare questo reward?')) return;
+
+        try {
+            const response = await fetch(`https://ccbrothers-backend.onrender.com/admin/rewards/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'admin-token': adminToken
+                }
+            });
+
+            if (response.ok) {
+                alert('Reward eliminato con successo');
+                loadRewards();
+            } else {
+                alert('Errore durante l\'eliminazione');
+            }
+        } catch (error) {
+            console.error('Errore durante l\'eliminazione:', error);
+            alert('Errore durante l\'eliminazione');
+        }
+    };
+
+    // Gestione aggiunta nuovo reward
+    const addRewardBtn = document.getElementById('add-reward');
+    if (addRewardBtn) {
+        addRewardBtn.addEventListener('click', async () => {
+            const level = prompt('Inserisci il livello:');
+            const requiredPurchases = prompt('Inserisci il numero di acquisti richiesti:');
+            const description = prompt('Inserisci la descrizione:');
+            
+            if (!level || !requiredPurchases || !description) return;
+
+            try {
+                const response = await fetch('https://ccbrothers-backend.onrender.com/admin/rewards', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'admin-token': adminToken
+                    },
+                    body: JSON.stringify({
+                        level,
+                        requiredPurchases: parseInt(requiredPurchases),
+                        description
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Nuovo reward aggiunto con successo');
+                    loadRewards();
+                } else {
+                    alert('Errore durante l\'aggiunta');
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+                alert('Errore durante l\'aggiunta del reward');
+            }
+        });
+    }
+
     // Caricamento iniziale dei dati
     async function loadInitialData() {
         await Promise.all([
