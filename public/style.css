@@ -191,6 +191,7 @@ input:valid ~ label {
     padding: 20px;
     min-height: -webkit-fill-available; /* Fix per iOS */
     overflow-y: auto; /* Permette lo scroll quando necessario */
+    padding-bottom: 20px; /* Spazio sotto i contatti */
 }
 
 /* Per schermi molto piccoli in portrait */
@@ -740,7 +741,8 @@ input:valid ~ label {
 }
 
 .contact-info {
-    position: fixed;
+    position: relative;
+    margin-top: 30px;
     bottom: 20px;
     left: 0;
     right: 0;
