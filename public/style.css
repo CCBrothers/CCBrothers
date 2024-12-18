@@ -738,3 +738,62 @@ input:valid ~ label {
         padding: 12px;
     }
 }
+
+.contact-info {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px 20px;
+    background: linear-gradient(125deg, #1a1f35 0%, #2d3250 100%);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    border-top: 1px solid rgba(242, 214, 96, 0.2);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-label {
+    color: #f2d660;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.contact-value {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.contact-value:hover {
+    color: #f2d660;
+    transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .contact-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .contact-label {
+        font-size: 12px;
+    }
+
+    .contact-value {
+        font-size: 12px;
+    }
+}
