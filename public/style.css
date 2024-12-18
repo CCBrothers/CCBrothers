@@ -15,7 +15,8 @@ body {
     justify-content: center;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden; /* Blocca solo lo scroll orizzontale */
+    overflow-y: auto;   /* Permette lo scroll verticale */
 }
 
 /* Form Container Styles */
@@ -189,7 +190,7 @@ input:valid ~ label {
     background: linear-gradient(135deg, #1a1f35 0%, #2d3250 100%);
     padding: 20px;
     min-height: -webkit-fill-available; /* Fix per iOS */
-    overflow: hidden;
+    overflow-y: auto; /* Permette lo scroll quando necessario */
 }
 
 /* Per schermi molto piccoli in portrait */
