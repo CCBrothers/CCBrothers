@@ -5,14 +5,24 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 
-// Connessione MongoDB
-mongoose.connect('mongodb+srv://ccbrothers:Metanolo89!@ccbrothers.hx3kl.mongodb.net/?retryWrites=true&w=majority&appName=CCBrothers', {
+// Middleware
+app.use(cors());
+app.use(express.json()); // Per leggere il body delle richieste POST
+
+// Connessione a MongoDB
+mongoose.connect('mongodb+srv://ccbrothers:Metanolo89!@ccbrothers.hx3kl.mongodb.net/ccbrothers?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
     console.log('Connesso a MongoDB Atlas!');
 }).catch((error) => {
-    console.error('Errore di connessione:', error);
+    console.error('Errore di connessione:', error.message);
+    process.exit(1); // Ferma il server se la connessione fallisce
+});
+
+// Avvio del server
+app.listen(PORT, () => {
+    console.log(`Server avviato con successo su http://localhost:${PORT}`);
 });
 
 // Schema Utente
