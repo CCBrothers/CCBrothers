@@ -20,7 +20,7 @@ formRegistrazione.addEventListener('submit', async (event) => {
     const email = document.getElementById('email').value;
 
     try {
-        const response = await fetch('https://ccbrothers-backend.onrender.com/register', {
+        const response = await fetch('https://ccbrothers-backend.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,9 +29,9 @@ formRegistrazione.addEventListener('submit', async (event) => {
         });
 
         const data = await response.json();
-        console.log('Risposta registrazione:', data);
         
         if (response.ok) {
+            // Mostra il modal invece dell'alert
             uniqueCodeDisplay.textContent = data.codice;
             modal.style.display = 'flex';
         } else {
@@ -51,7 +51,7 @@ formAccesso.addEventListener('submit', async (event) => {
     const codiceUnivoco = document.getElementById('codice-univoco').value;
 
     try {
-        const response = await fetch('https://ccbrothers-backend.onrender.com/verify-code', {
+        const response = await fetch('https://ccbrothers-backend.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,9 +60,8 @@ formAccesso.addEventListener('submit', async (event) => {
         });
 
         const data = await response.json();
-        console.log('Risposta accesso:', data);
         
-        if (response.ok && data.persona) {
+        if (response.ok) {
             mostraSezionePersonale(data.persona);
         } else {
             alert(data.message || 'Codice non valido.');
