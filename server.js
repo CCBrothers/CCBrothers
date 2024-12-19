@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // Connessione MongoDB
-mongoose.connect('TUA-STRINGA-DI-CONNESSIONE', {
+mongoose.connect('mongodb+srv://ccbrothers:Metanolo89!@ccbrothers.hx3kl.mongodb.net/?retryWrites=true&w=majority&appName=CCBrothers', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
