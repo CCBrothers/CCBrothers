@@ -13,11 +13,11 @@ modalCloseBtn.addEventListener('click', () => {
 const formRegistrazione = document.getElementById('form-registrazione');
 formRegistrazione.addEventListener('submit', async (event) => {
     event.preventDefault();
-
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    const nickname = document.getElementById('nickname').value.trim();
-    const email = document.getElementById('email').value.trim();
+    
+    const nome = document.getElementById('nome').value;
+    const cognome = document.getElementById('cognome').value;
+    const nickname = document.getElementById('nickname').value;
+    const email = document.getElementById('email').value;
 
     try {
         const response = await fetch('https://ccbrothers-backend.onrender.com/register', {
@@ -29,7 +29,8 @@ formRegistrazione.addEventListener('submit', async (event) => {
         });
 
         const data = await response.json();
-
+        console.log('Risposta registrazione:', data);
+        
         if (response.ok) {
             uniqueCodeDisplay.textContent = data.codice;
             modal.style.display = 'flex';
@@ -47,7 +48,7 @@ const formAccesso = document.getElementById('form-accesso');
 formAccesso.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const codiceUnivoco = document.getElementById('codice-univoco').value.trim();
+    const codiceUnivoco = document.getElementById('codice-univoco').value;
 
     try {
         const response = await fetch('https://ccbrothers-backend.onrender.com/verify-code', {
@@ -59,15 +60,16 @@ formAccesso.addEventListener('submit', async (event) => {
         });
 
         const data = await response.json();
-
-        if (response.ok) {
+        console.log('Risposta accesso:', data);
+        
+        if (response.ok && data.persona) {
             mostraSezionePersonale(data.persona);
         } else {
             alert(data.message || 'Codice non valido.');
         }
     } catch (error) {
-        console.error('Errore durante l'accesso:', error);
-        alert('Errore durante l'accesso. Contatta il supporto.');
+        console.error('Errore durante l\'accesso:', error);
+        alert('Errore durante l\'accesso. Contatta il supporto.');
     }
 });
 
@@ -84,52 +86,81 @@ function formattaData(dateString) {
 // Funzione per trovare il livello corrente dell'utente
 function findCurrentLevel(acquisti) {
     const levels = [
-        { min: 0, max: 9 },
-        { min: 10, max: 24 },
-        { min: 25, max: 49 },
-        { min: 50, max: 74 },
-        { min: 75, max: 99 },
-        { min: 100, max: 149 },
-        { min: 150, max: 199 },
-        { min: 200, max: Infinity }
+        { min: 0, max: 9 },      // Sotto il primo livello
+        { min: 10, max: 24 },    // Livello 1
+        { min: 25, max: 49 },    // Livello 2
+        { min: 50, max: 74 },    // Livello 3
+        { min: 75, max: 99 },    // Livello 4
+        { min: 100, max: 149 },  // Livello 5
+        { min: 150, max: 199 },  // Livello 6
+        { min: 200, max: Infinity } // Livello 7
     ];
-
+    
     return levels.findIndex(level => acquisti >= level.min && acquisti <= level.max);
 }
 
 // Funzione per aggiornare lo stato dei reward
 function updateRewardsStatus(acquisti) {
     const rewardItems = document.querySelectorAll('.reward-item');
-    const livelli = [10, 25, 50, 75, 100, 150, 200];
+    const livelli = [
+        {requisito: 10, completato: false},
+        {requisito: 25, completato: false},
+        {requisito: 50, completato: false},
+        {requisito: 75, completato: false},
+        {requisito: 100, completato: false},
+        {requisito: 150, completato: false},
+        {requisito: 200, completato: false}
+    ];
 
-    rewardItems.forEach((item, index) => {
-        item.classList.toggle('completed', acquisti >= livelli[index]);
-
-        if (acquisti >= livelli[index] && !item.querySelector('.checkmark')) {
-            const checkmark = document.createElement('span');
-            checkmark.className = 'checkmark';
-            checkmark.textContent = '✓';
-            item.appendChild(checkmark);
-        } else if (acquisti < livelli[index] && item.querySelector('.checkmark')) {
-            item.querySelector('.checkmark').remove();
+    // Reset - rimuovi tutti i completamenti precedenti
+    rewardItems.forEach(item => {
+        item.classList.remove('completed');
+        const checkmark = item.querySelector('.checkmark');
+        if (checkmark) {
+            checkmark.remove();
         }
     });
+
+    // Trova il livello attuale
+    let livelloAttuale = -1;
+    for (let i = 0; i < livelli.length; i++) {
+        if (acquisti >= livelli[i].requisito) {
+            livelloAttuale = i;
+        }
+    }
+
+    // Marca come completati solo i livelli fino a quello attuale
+    for (let i = 0; i <= livelloAttuale; i++) {
+        const item = rewardItems[i];
+        if (item) {
+            item.classList.add('completed');
+            if (!item.querySelector('.checkmark')) {
+                const checkmark = document.createElement('span');
+                checkmark.className = 'checkmark';
+                checkmark.innerHTML = '✓';
+                item.appendChild(checkmark);
+            }
+        }
+    }
 }
 
-// Mostra la sezione personale
 function mostraSezionePersonale(persona) {
     document.querySelector('.form-container').style.display = 'none';
-
+    
     document.getElementById('nome-completo').textContent = `${persona.nome} ${persona.cognome}`;
     document.getElementById('nickname-utente').textContent = persona.nickname;
     document.getElementById('codice-utente').textContent = persona.codice;
     document.getElementById('acquisti-utente').textContent = `${persona.acquisti}/100`;
     document.getElementById('data-registrazione').textContent = formattaData(persona.dataRegistrazione);
 
+    // Calcola e aggiorna la barra di progresso
     const progresso = Math.min((persona.acquisti / 100) * 100, 100);
     document.getElementById('barra-progresso').style.width = `${progresso}%`;
 
+    // Aggiorna lo stato dei reward
     updateRewardsStatus(persona.acquisti);
+
+    // Mostra la sezione personale
     document.getElementById('sezione-personale').style.display = 'flex';
 }
 
